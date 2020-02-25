@@ -5,6 +5,9 @@
 To build `zwaves.jar` we need to cross compile the library for Linux, Windows and MacOS. 
 This HOWTO is working for `rust 1.38+ stable` and Ubuntu 64bit.
 
+### If cross compilation for i686 windows broken in your enviroment
+Build dll for win32 in native enviroment
+Comment lines for i686 in build_all.sh
 
 ### Install gradle
 
