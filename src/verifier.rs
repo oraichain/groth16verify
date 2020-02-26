@@ -140,7 +140,7 @@ impl<E: Engine> TruncatedVerifyingKey<E> {
 
         reader.read_exact(g1_repr.as_mut())?;
         let alpha_g1 = g1_repr
-                .into_affine()
+                .into_affine_unchecked()
                 .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))
                 .and_then(|e| if e.is_zero() {
                     Err(io::Error::new(io::ErrorKind::InvalidData, "point at infinity"))
@@ -150,7 +150,7 @@ impl<E: Engine> TruncatedVerifyingKey<E> {
 
         reader.read_exact(g2_repr.as_mut())?;
         let beta_g2 = g2_repr
-                .into_affine()
+                .into_affine_unchecked()
                 .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))
                 .and_then(|e| if e.is_zero() {
                     Err(io::Error::new(io::ErrorKind::InvalidData, "point at infinity"))
@@ -160,7 +160,7 @@ impl<E: Engine> TruncatedVerifyingKey<E> {
 
         reader.read_exact(g2_repr.as_mut())?;
         let gamma_g2 = g2_repr
-                .into_affine()
+                .into_affine_unchecked()
                 .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))
                 .and_then(|e| if e.is_zero() {
                     Err(io::Error::new(io::ErrorKind::InvalidData, "point at infinity"))
@@ -170,7 +170,7 @@ impl<E: Engine> TruncatedVerifyingKey<E> {
 
         reader.read_exact(g2_repr.as_mut())?;
         let delta_g2 = g2_repr
-                .into_affine()
+                .into_affine_unchecked()
                 .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))
                 .and_then(|e| if e.is_zero() {
                     Err(io::Error::new(io::ErrorKind::InvalidData, "point at infinity"))
@@ -182,7 +182,7 @@ impl<E: Engine> TruncatedVerifyingKey<E> {
 
         while reader.read_exact(g1_repr.as_mut()).is_ok() {
             let g1 = g1_repr
-                    .into_affine()
+                    .into_affine_unchecked()
                     .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))
                     .and_then(|e| if e.is_zero() {
                         Err(io::Error::new(io::ErrorKind::InvalidData, "point at infinity"))
@@ -228,11 +228,11 @@ pub fn verify_proof<'a, E: Engine>(
     neg_a.negate();
 
     Ok(E::final_exponentiation(
-        &E::miller_loop([
+        &E::miller_loop(&[
             (&neg_a.prepare(), &proof.b.prepare()),
             (&tvk.alpha_g1.prepare(), &tvk.beta_g2.prepare()),
             (&acc.into_affine().prepare(), &tvk.gamma_g2.prepare()),
             (&proof.c.prepare(), &tvk.delta_g2.prepare())
-        ].into_iter())
+        ])
     ).unwrap() == E::Fqk::one())
 }

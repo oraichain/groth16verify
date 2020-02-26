@@ -16,8 +16,13 @@ cp target/x86_64-unknown-linux-gnu/release/libzwaves_jni.so javalib/src/main/res
 PATH="$(pwd)/osxcross/target/bin:$PATH" CC=o64-clang CXX=o64-clang++ LIBZ_SYS_STATIC=1 cargo build --target x86_64-apple-darwin --release
 cp target/x86_64-apple-darwin/release/libzwaves_jni.dylib javalib/src/main/resources/META-INF/native/osx
 
-cargo build --target=i686-pc-windows-gnu --release
-cp target/i686-pc-windows-gnu/release/zwaves_jni.dll javalib/src/main/resources/META-INF/native/windows32
+
+if [-f target/i686-pc-windows-msvs/release/zwaves_jni.dll]; then 
+    cp target/i686-pc-windows-msvs/release/zwaves_jni.dll javalib/src/main/resources/META-INF/native/windows32
+else
+    cargo build --target=i686-pc-windows-gnu --release
+    cp target/i686-pc-windows-gnu/release/zwaves_jni.dll javalib/src/main/resources/META-INF/native/windows32
+fi
 
 cargo build --target=x86_64-pc-windows-gnu --release
 cp target/x86_64-pc-windows-gnu/release/zwaves_jni.dll javalib/src/main/resources/META-INF/native/windows64
