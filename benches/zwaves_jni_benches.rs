@@ -127,48 +127,48 @@ fn bench_groth16_verify_8(b: &mut Bencher) {
 }
 
 #[bench]
-fn bench_groth16_verify_8(b: &mut Bencher) {
+fn bench_groth16_verify_9(b: &mut Bencher) {
     bench_groth16_verify(b, 9);
 }
 
 
 #[bench]
-fn bench_groth16_verify_8(b: &mut Bencher) {
+fn bench_groth16_verify_10(b: &mut Bencher) {
     bench_groth16_verify(b, 10);
 }
 
 
 #[bench]
-fn bench_groth16_verify_8(b: &mut Bencher) {
+fn bench_groth16_verify_11(b: &mut Bencher) {
     bench_groth16_verify(b, 11);
 }
 
 
 #[bench]
-fn bench_groth16_verify_8(b: &mut Bencher) {
+fn bench_groth16_verify_12(b: &mut Bencher) {
     bench_groth16_verify(b, 12);
 }
 
 
 #[bench]
-fn bench_groth16_verify_8(b: &mut Bencher) {
+fn bench_groth16_verify_13(b: &mut Bencher) {
     bench_groth16_verify(b, 13);
 }
 
 
 #[bench]
-fn bench_groth16_verify_8(b: &mut Bencher) {
+fn bench_groth16_verify_14(b: &mut Bencher) {
     bench_groth16_verify(b, 14);
 }
 
 
 #[bench]
-fn bench_groth16_verify_8(b: &mut Bencher) {
+fn bench_groth16_verify_15(b: &mut Bencher) {
     bench_groth16_verify(b, 15);
 }
 
 
 #[bench]
-fn bench_groth16_verify_8(b: &mut Bencher) {
+fn bench_groth16_verify_16(b: &mut Bencher) {
     bench_groth16_verify(b, 16);
 }
