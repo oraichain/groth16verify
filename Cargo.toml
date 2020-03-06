@@ -8,6 +8,9 @@ edition = "2018"
 crate-type = ["cdylib", "rlib"]
 name = "zwaves_jni"
 
+[[bin]]
+name="show_test_vectors"
+
 [dependencies]
 pairing = {version = "0.15.1", git = "https://github.com/snjax/pairing", branch = "feature/fastsubgroupchecks" }
 ff = {version = "0.5.2", features = ["derive"] }
@@ -17,6 +20,8 @@ serde = { version = "1.0", features = ["derive"] }
 base64 = "0.11.0"
 jni = "0.14.0"
 byteorder = "1"
+rand_xorshift = "0.2"
+rand_core = "0.5"
 
 [dev-dependencies]
 rand_xorshift = "0.2"

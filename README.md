@@ -17,7 +17,7 @@ Install [gradle](https://gradle.org/install/).
 
 ```sh
 # Install dependencies for cross compilation Linux to MacOS
-apt install cmake clang gcc g++ zlib1g-dev libmpc-dev libmpfr-dev libgmp-dev libxml2-dev libssl-dev
+apt install cmake clang gcc g++ zlib1g-dev libmpc-dev libmpfr-dev libgmp-dev libxml2-dev libssl-dev gcc-multilib libc6-dev-i386 mingw-w64
 
 # Install dependencies for cross compilation Linux to Windows
 apt install mingw-w64

@@ -1,11 +1,9 @@
-#![feature(test)]
 
-extern crate test;
 extern crate zwaves_jni;
 extern crate rand_core;
 extern crate rand_xorshift;
 
-use test::Bencher;
+
 use zwaves_jni::*;
 use base64::{decode, encode};
 
@@ -31,8 +29,9 @@ use serialization::write_fr_iter;
 
 
 
-fn bench_groth16_verify(b: &mut Bencher, ninputs: usize) {
+fn main() {
 
+    const ninputs: usize=16;
     let mut rng = XorShiftRng::from_seed([
         0x59, 0x62, 0xbe, 0x5d, 0x76, 0x3d, 0x31, 0x8d, 0x17, 0xdb, 0x37, 0x32, 0x54, 0x06,
         0xbc, 0xe5,
@@ -65,110 +64,5 @@ fn bench_groth16_verify(b: &mut Bencher, ninputs: usize) {
         (base64::encode(vk_buff.get_ref()), base64::encode(proof_buff.get_ref()), base64::encode(&inputs_buff))
     }).collect::<Vec<_>>();
 
-
-    let mut n: usize = 0;
-
-    b.iter(|| {
-        let (vk, proof, inputs) = v[n].clone();
-        n = (n + 1) % SAMPLES;
-        let vk = decode(vk.as_str()).unwrap();
-        let proof = decode(proof.as_str()).unwrap();
-        let inputs = decode(inputs.as_str()).unwrap();
-        groth16_verify(&vk, &proof, &inputs)
-    });
-}
-
-
-#[bench]
-fn bench_groth16_verify_0(b: &mut Bencher) {
-    bench_groth16_verify(b, 0);
-}
-
-#[bench]
-fn bench_groth16_verify_1(b: &mut Bencher) {
-    bench_groth16_verify(b, 1);
-}
-
-#[bench]
-fn bench_groth16_verify_2(b: &mut Bencher) {
-    bench_groth16_verify(b, 2);
-}
-
-#[bench]
-fn bench_groth16_verify_3(b: &mut Bencher) {
-    bench_groth16_verify(b, 3);
-}
-
-#[bench]
-fn bench_groth16_verify_4(b: &mut Bencher) {
-    bench_groth16_verify(b, 4);
-}
-
-
-#[bench]
-fn bench_groth16_verify_5(b: &mut Bencher) {
-    bench_groth16_verify(b, 5);
-}
-
-
-#[bench]
-fn bench_groth16_verify_6(b: &mut Bencher) {
-    bench_groth16_verify(b, 6);
-}
-
-#[bench]
-fn bench_groth16_verify_7(b: &mut Bencher) {
-    bench_groth16_verify(b, 7);
-}
-
-#[bench]
-fn bench_groth16_verify_8(b: &mut Bencher) {
-    bench_groth16_verify(b, 8);
-}
-
-#[bench]
-fn bench_groth16_verify_9(b: &mut Bencher) {
-    bench_groth16_verify(b, 9);
-}
-
-
-#[bench]
-fn bench_groth16_verify_10(b: &mut Bencher) {
-    bench_groth16_verify(b, 10);
-}
-
-
-#[bench]
-fn bench_groth16_verify_11(b: &mut Bencher) {
-    bench_groth16_verify(b, 11);
-}
-
-
-#[bench]
-fn bench_groth16_verify_12(b: &mut Bencher) {
-    bench_groth16_verify(b, 12);
-}
-
-
-#[bench]
-fn bench_groth16_verify_13(b: &mut Bencher) {
-    bench_groth16_verify(b, 13);
-}
-
-
-#[bench]
-fn bench_groth16_verify_14(b: &mut Bencher) {
-    bench_groth16_verify(b, 14);
-}
-
-
-#[bench]
-fn bench_groth16_verify_15(b: &mut Bencher) {
-    bench_groth16_verify(b, 15);
-}
-
-
-#[bench]
-fn bench_groth16_verify_16(b: &mut Bencher) {
-    bench_groth16_verify(b, 16);
+    println!("{:?}", v);
 }
